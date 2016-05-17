@@ -21,13 +21,14 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    @pin = Pin.find(params[:pin_id])
-    @comment = @pin.comments.find(params[:id])
-    @comment.destroy
-    respond_to do |format|
-        format.html { redirect_to pin_path(@pin) }
-        format.js { render :layout => false }
-    end
+      @pin = Pin.find(params[:pin_id])
+      @comment = @pin.comments.find(params[:id])
+      @comment.destroy
+      respond_to do |format|
+          format.html { redirect_to pin_path(@pin) }
+          format.js { render :layout => false }
+      end
+
   end
 
 
