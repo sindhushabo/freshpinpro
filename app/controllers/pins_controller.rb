@@ -1,6 +1,6 @@
 class PinsController < ApplicationController
   before_action :find_pin, only:[:show, :edit,:update, :destroy, :upvote, :downvote]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @pins = Pin.all.order("created_at DESC")
   end
@@ -22,11 +22,13 @@ class PinsController < ApplicationController
   end
 
   def edit
-
+    if @pin.user != current_user
+      redirect_to root_path, notice: "Pin cannot be edited"
+    end
   end
 
   def update
-    if @pin.update(pin_params)
+    if @pin.update(pin_params) && @pin.user == current_user
       redirect_to @pin, notice: "Pin was succesfully updated"
     else
       render 'edit'
@@ -35,9 +37,12 @@ class PinsController < ApplicationController
   end
 
   def destroy
-
-    @pin.destroy
-    redirect_to root_path
+    if @pin.user == current_user
+      @pin.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path, notice: "Pin cannot be destroyed"
+    end
   end
 
   def upvote
