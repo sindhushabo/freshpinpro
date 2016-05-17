@@ -2,7 +2,7 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading pin_image">
-        <%= social_share_button_tag(@pin.title, :image => @pin.image.url, :url => @pin.image.url, :'data-type' => 'photo',via: "PintrestClone~ Description: "+@pin.description  ) %>
+        <%= social_share_button_tag(@pin.title, via: "PintrestClone~ Description: "+@pin.description  ) %>
         <%= image_tag @pin.image.url %>
 
       </div>
