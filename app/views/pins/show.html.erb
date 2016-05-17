@@ -2,7 +2,7 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading pin_image">
-        <%= social_share_button_tag(@pin.title, via: "PintrestClone~ Description: "+@pin.description  ) %>
+
         <%= image_tag @pin.image.url %>
 
       </div>
@@ -13,12 +13,6 @@
         <p class="description">
           <%= @pin.description %>
         </p>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="Sindhushab" data-size="large" data-dnt="true">Tweet</a>
-        <script>
-          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);
-            js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
-            fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-        </script>
         <div id="comments">
           <%= render "comments/form" %>
           <% @comments.each do |comment| %>
@@ -45,9 +39,30 @@
               User's email:
               <%= @pin.user.email %>
             </p>
+            <div class="btn-group pull-left">
+
+              <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+              </script>
+              <div class="fb-share-button" data-href="https://limitless-spire-18565.herokuapp.com/" data-layout="button" data-mobile-iframe="true"></div>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-via="Sindhushab" data-dnt="true">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);
+                js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+              </script>
+              <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+              <a href="https://www.pinterest.com/pin/create/button/">
+                <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" />
+              </a>
+            </div>
           </div>
           <div class="col-md-6">
-            <div class="btn-group pull-right">
+            <div id="fb-root"></div>
+          <div class="btn-group pull-right">
               <%= link_to like_pin_path(@pin), method: :get, class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-thumbs-up"></span>
                   <%= @pin.get_upvotes.size %>
